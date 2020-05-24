@@ -6,7 +6,7 @@ import {
 } from 'react-navigation-tabs';
 import { Decks, AddDeck } from './components';
 import { Ionicons } from '@expo/vector-icons';
-import { Platform } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 
 let TabNavigator;
 switch (Platform.OS) {
@@ -41,4 +41,14 @@ switch (Platform.OS) {
     });
 }
 
-export default createAppContainer(TabNavigator);
+const NavContainer = createAppContainer(TabNavigator);
+
+const App = () => {
+  return (
+    <NavContainer>
+      <StatusBar backgroundColor="rgb(33, 150, 243)" barStyle="light-content" />
+    </NavContainer>
+  );
+};
+
+export default App;
