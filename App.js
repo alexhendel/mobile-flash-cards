@@ -1,29 +1,44 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import {
+  createBottomTabNavigator,
+  createMaterialTopTabNavigator,
+} from 'react-navigation-tabs';
 import { Decks, AddDeck } from './components';
 import { Ionicons } from '@expo/vector-icons';
+import { Platform } from 'react-native';
 
-const TabNavigator = createBottomTabNavigator(
-  {
-    Decks: Decks,
-    'Add Deck': AddDeck,
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, horizontal, tintColor }) => {
-        const { routeName } = navigation.state;
-        let IconComponent = Ionicons;
-        let iconName;
-        if (routeName === 'Decks') {
-          iconName = focused ? 'md-list-box' : 'md-list';
-        } else if (routeName === 'Add Deck') {
-          iconName = focused ? 'md-add-circle' : 'md-add';
-        }
-        return <IconComponent name={iconName} size={25} color={tintColor} />;
+let TabNavigator;
+switch (Platform.OS) {
+  case 'ios':
+    TabNavigator = createBottomTabNavigator(
+      {
+        Decks: Decks,
+        'Add Deck': AddDeck,
       },
-    }),
-  }
-);
+      {
+        defaultNavigationOptions: ({ navigation }) => ({
+          tabBarIcon: ({ focused, horizontal, tintColor }) => {
+            const { routeName } = navigation.state;
+            let IconComponent = Ionicons;
+            let iconName;
+            if (routeName === 'Decks') {
+              iconName = focused ? 'ios-list-box' : 'ios-list';
+            } else if (routeName === 'Add Deck') {
+              iconName = focused ? 'ios-add-circle' : 'ios-add';
+            }
+            return (
+              <IconComponent name={iconName} size={25} color={tintColor} />
+            );
+          },
+        }),
+      }
+    );
+  default:
+    TabNavigator = createMaterialTopTabNavigator({
+      Decks: Decks,
+      'Add Deck': AddDeck,
+    });
+}
 
 export default createAppContainer(TabNavigator);
