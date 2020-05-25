@@ -1,7 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FlatList, View, Text, StyleSheet } from 'react-native';
+import {
+  FlatList,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { withNavigation } from 'react-navigation';
 
 const Item = ({ title, questions }) => {
   return (
@@ -18,12 +25,21 @@ const Item = ({ title, questions }) => {
 };
 
 const DeckList = (props) => {
+  const { navigation } = props;
   return (
     <View style={styles.container}>
       <FlatList
         data={props.list}
         renderItem={({ item }) => (
-          <Item title={item.title} questions={item.questions.length} />
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Deck Details', { id: item.id })}
+          >
+            <Item
+              title={item.title}
+              questions={item.questions.length}
+              id={item.id}
+            />
+          </TouchableOpacity>
         )}
         keyExtractor={(item) => item.id}
       />
@@ -63,4 +79,4 @@ DeckList.propTypes = {
   list: PropTypes.array.isRequired,
 };
 
-export default DeckList;
+export default withNavigation(DeckList);
