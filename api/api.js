@@ -30,6 +30,14 @@ export function getDeck(id) {
   });
 }
 
+export function deleteDeck(id) {
+  return new Promise(function (resolve) {
+    decks[id] = {};
+    delete decks[id];
+    resolve(decks);
+  });
+}
+
 export function addDeck(title) {
   const id = generateUID();
   decks[id] = {
