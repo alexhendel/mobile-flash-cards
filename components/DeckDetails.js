@@ -11,8 +11,9 @@ class DeckDetails extends Component {
       this.props.navigation.navigate('Decks')
     );
   };
-  handleAdd = () => {
-    console.log('add');
+  handleAdd = (id) => {
+    const { navigation } = this.props;
+    navigation.navigate('AddCard', { id });
   };
   handleStartQuiz = (id) => {
     const { navigation, decks } = this.props;
@@ -20,6 +21,7 @@ class DeckDetails extends Component {
     if (decks[id].questions.length === 0 || !decks[id].questions) {
       navigation.navigate('NoCards');
     } else {
+      navigation.navigate('Quiz');
     }
   };
   render() {
@@ -39,7 +41,7 @@ class DeckDetails extends Component {
                 <Button
                   color={Theme.primary.color}
                   title="Add Card"
-                  onPress={() => this.handleAdd()}
+                  onPress={() => this.handleAdd(id)}
                 />
               </View>
               <View style={styles.actionButton}>

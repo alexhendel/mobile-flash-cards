@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TextInput, Button } from 'react-native';
+import { StackActions } from 'react-navigation';
 import Theme from '../theme';
 import { handleAddDeck } from '../actions/decks';
 import { connect } from 'react-redux';
@@ -13,6 +14,7 @@ class AddDeck extends Component {
     dispatch(handleAddDeck(this.state.deckName)).then(() => {
       this.setState(() => ({ deckName: '' }));
       this.props.navigation.navigate('Decks');
+      this.props.navigation.dispatch(StackActions.popToTop());
     });
   };
   handleDeckNameChange = (value) => {

@@ -3,6 +3,7 @@ import * as API from '../api/api';
 export const ADD_DECK = 'ADD_DECK';
 export const GET_DECKS = 'GET_DECKS';
 export const DELETE_DECK = 'DELETE_DECK';
+export const ADD_QUESTION = 'ADD_QUESTION';
 
 function addDeck(deck) {
   return {
@@ -25,6 +26,14 @@ function deleteDeck(decks) {
   };
 }
 
+function addQuestion(id, question) {
+  return {
+    type: ADD_QUESTION,
+    id,
+    question,
+  };
+}
+
 export function handleAddDeck(title) {
   return (dispatch) => {
     return API.addDeck(title).then((deck) => dispatch(addDeck(deck)));
@@ -42,5 +51,13 @@ export function handleGetDecks() {
 export function handleDeleteDeck(id) {
   return (dispatch) => {
     return API.deleteDeck(id).then((decks) => dispatch(deleteDeck(decks)));
+  };
+}
+
+export function handleAddQuestion(id, question, answer) {
+  return (dispatch) => {
+    return API.addQuestion(id, { question, answer }).then((question) =>
+      dispatch(addQuestion(id, question))
+    );
   };
 }
