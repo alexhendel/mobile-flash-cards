@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FlatList, View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-function Item({ title }) {
+const Item = ({ title, questions }) => {
   return (
     <View style={styles.itemContainer}>
       <View style={styles.icon}>
@@ -11,18 +11,20 @@ function Item({ title }) {
       </View>
       <View style={styles.itemTextContainer}>
         <Text style={styles.deckTitle}>{title}</Text>
-        <Text style={styles.deckSubtitle}>{title}</Text>
+        <Text style={styles.deckSubtitle}>{`${questions} card(s)`}</Text>
       </View>
     </View>
   );
-}
+};
 
 const DeckList = (props) => {
   return (
     <View style={styles.container}>
       <FlatList
         data={props.list}
-        renderItem={({ item }) => <Item title={item.title} />}
+        renderItem={({ item }) => (
+          <Item title={item.title} questions={item.questions.length} />
+        )}
         keyExtractor={(item) => item.id}
       />
     </View>
