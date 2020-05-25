@@ -19,23 +19,26 @@ function generateUID() {
 }
 
 export function getDecks() {
-  const deckArray = [];
-  Object.keys(decks).forEach((key) => {
-    deckArray.push(decks[key]);
+  return new Promise(function (resolve) {
+    resolve(decks);
   });
-  return deckArray;
 }
 
 export function getDeck(id) {
-  return decks[id];
+  return new Promise(function (resolve) {
+    resolve(decks[id]);
+  });
 }
 
 export function addDeck(title) {
   const id = generateUID();
-  return (decks[id] = {
+  decks[id] = {
     id,
     title,
     questions: [],
+  };
+  return new Promise(function (resolve) {
+    resolve(decks[id]);
   });
 }
 
@@ -43,5 +46,8 @@ export function addQuestion(id, { question, answer }) {
   const questionId = generateUID();
   const newQuestion = { id: questionId, question, answer };
   decks[id].questions.push(newQuestion);
-  return newQuestion;
+
+  return new Promise(function (resolve) {
+    resolve(newQuestion);
+  });
 }

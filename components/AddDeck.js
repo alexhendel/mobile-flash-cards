@@ -1,13 +1,41 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TextInput, Button } from 'react-native';
+import Theme from '../theme';
+import { handleAddDeck } from '../actions/decks';
+import { connect } from 'react-redux';
 
 class AddDeck extends Component {
+  state = {
+    deckName: '',
+  };
+  handleAdd = () => {
+    const { dispatch } = this.props;
+    dispatch(handleAddDeck(this.state.deckName)).then(() => {
+      this.setState(() => ({ deckName: '' }));
+      this.props.navigation.navigate('Decks');
+    });
+  };
+  handleDeckNameChange = (value) => {
+    this.setState(() => ({ deckName: value }));
+  };
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.header}>Add a new flash card deck:</Text>
-        <TextInput placeholder="Deck Name" style={styles.input}></TextInput>
-        <Button title="Add" />
+        <TextInput
+          value={this.state.deckName}
+          onChangeText={this.handleDeckNameChange}
+          placeholder="Deck Name"
+          style={styles.input}
+        ></TextInput>
+        <Button
+          title="Add"
+          color={Theme.primary.color}
+          disabled={
+            this.state.deckName.length <= 0 || this.state.deckName === null
+          }
+          onPress={this.handleAdd}
+        />
       </View>
     );
   }
@@ -21,6 +49,7 @@ const styles = StyleSheet.create({
   },
   header: {
     marginBottom: 25,
+    fontSize: 25,
   },
   input: {
     borderRadius: 3,
@@ -31,4 +60,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddDeck;
+export default connect((state) => ({
+  decks: state.decks,
+}))(AddDeck);

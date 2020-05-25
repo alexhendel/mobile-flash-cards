@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -8,6 +8,13 @@ import { Platform, StatusBar, SafeAreaView } from 'react-native';
 import DeckDetails from './components/DeckDetails';
 import AddCard from './components/AddCard';
 import Quiz from './components/Quiz';
+import Theme from './theme';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './reducers';
+import middleware from './middleware';
+
+const store = createStore(reducer, middleware);
 
 const DeckStackNavigator = createStackNavigator({
   Decks: Decks,
@@ -63,6 +70,11 @@ switch (Platform.OS) {
               <IconComponent name={iconName} size={25} color={tintColor} />
             );
           },
+          barStyle: {
+            backgroundColor: Theme.primary.color,
+            paddingBottom: 5,
+            paddingTop: 5,
+          },
         }),
       }
     );
@@ -70,17 +82,21 @@ switch (Platform.OS) {
 
 const NavContainer = createAppContainer(TabNavigator);
 
-const App = () => {
-  return (
-    <NavContainer>
-      <SafeAreaView style={{ flex: 1 }}>
-        <StatusBar
-          backgroundColor="rgb(33, 150, 243)"
-          barStyle="light-content"
-        />
-      </SafeAreaView>
-    </NavContainer>
-  );
-};
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <NavContainer>
+          <SafeAreaView style={{ flex: 1 }}>
+            <StatusBar
+              backgroundColor={Theme.primary.color}
+              barStyle="light-content"
+            />
+          </SafeAreaView>
+        </NavContainer>
+      </Provider>
+    );
+  }
+}
 
 export default App;
