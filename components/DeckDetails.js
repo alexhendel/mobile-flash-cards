@@ -11,6 +11,17 @@ class DeckDetails extends Component {
       this.props.navigation.navigate('Decks')
     );
   };
+  handleAdd = () => {
+    console.log('add');
+  };
+  handleStartQuiz = (id) => {
+    const { navigation, decks } = this.props;
+
+    if (decks[id].questions.length === 0 || !decks[id].questions) {
+      navigation.navigate('NoCards');
+    } else {
+    }
+  };
   render() {
     const { navigation } = this.props;
     const { decks } = this.props;
@@ -19,10 +30,26 @@ class DeckDetails extends Component {
       <>
         {decks[id] ? (
           <View style={styles.container}>
-            <Text style={styles.title}>{decks[id].title}</Text>
-            <Text style={styles.subTitle}>
-              {`${decks[id].questions.length} card(s) in this deck.`}
-            </Text>
+            <View style={styles.infoContainer}>
+              <Text style={styles.title}>{decks[id].title}</Text>
+              <Text style={styles.subTitle}>
+                {`${decks[id].questions.length} card(s) in this deck.`}
+              </Text>
+              <View style={styles.actionButton}>
+                <Button
+                  color={Theme.primary.color}
+                  title="Add Card"
+                  onPress={() => this.handleAdd()}
+                />
+              </View>
+              <View style={styles.actionButton}>
+                <Button
+                  color={Theme.primary.color}
+                  title="Start Quiz"
+                  onPress={() => this.handleStartQuiz(id)}
+                />
+              </View>
+            </View>
             <Button
               color={Theme.warn.color}
               title="Delete"
@@ -45,6 +72,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 100,
     flexDirection: 'column',
   },
+  infoContainer: {
+    marginBottom: 150,
+  },
   title: {
     fontSize: 25,
     paddingBottom: 2,
@@ -52,9 +82,12 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     fontSize: 15,
-    paddingBottom: 250,
     color: 'grey',
+    marginBottom: 60,
     textAlign: 'center',
+  },
+  actionButton: {
+    marginBottom: 25,
   },
 });
 

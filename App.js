@@ -5,21 +5,35 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { Decks, AddDeck } from './components';
 import { Ionicons } from '@expo/vector-icons';
 import { Platform, StatusBar, SafeAreaView } from 'react-native';
-import DeckDetails from './components/DeckDetails';
-import AddCard from './components/AddCard';
-import Quiz from './components/Quiz';
 import Theme from './theme';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
 import middleware from './middleware';
+import { NoCards, DeckDetails, AddCard, Quiz } from './components';
 
 const store = createStore(reducer, middleware);
 
 const DeckStackNavigator = createStackNavigator({
   Decks: Decks,
-  'Deck Details': DeckDetails,
-  'Add Card': AddCard,
+  DeckDetails: {
+    screen: DeckDetails,
+    navigationOptions: () => ({
+      title: 'Deck Details',
+    }),
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: () => ({
+      title: 'Add Card',
+    }),
+  },
+  NoCards: {
+    screen: NoCards,
+    navigationOptions: () => ({
+      title: 'No Cards',
+    }),
+  },
   Quiz: Quiz,
 });
 
@@ -29,7 +43,7 @@ switch (Platform.OS) {
     TabNavigator = createBottomTabNavigator(
       {
         Decks: DeckStackNavigator,
-        'Add Deck': AddDeck,
+        AddDeck: AddDeck,
       },
       {
         defaultNavigationOptions: ({ navigation }) => ({
@@ -39,7 +53,7 @@ switch (Platform.OS) {
             let iconName;
             if (routeName === 'Decks') {
               iconName = focused ? 'ios-list-box' : 'ios-list';
-            } else if (routeName === 'Add Deck') {
+            } else if (routeName === 'AddDeck') {
               iconName = focused ? 'ios-add-circle' : 'ios-add';
             }
             return (
@@ -53,7 +67,7 @@ switch (Platform.OS) {
     TabNavigator = createMaterialBottomTabNavigator(
       {
         Decks: DeckStackNavigator,
-        'Add Deck': AddDeck,
+        AddDeck: AddDeck,
       },
       {
         defaultNavigationOptions: ({ navigation }) => ({
@@ -63,7 +77,7 @@ switch (Platform.OS) {
             let iconName;
             if (routeName === 'Decks') {
               iconName = focused ? 'md-list-box' : 'md-list';
-            } else if (routeName === 'Add Deck') {
+            } else if (routeName === 'AddDeck') {
               iconName = focused ? 'md-add-circle' : 'md-add';
             }
             return (

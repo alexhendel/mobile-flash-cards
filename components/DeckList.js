@@ -12,7 +12,7 @@ const DeckList = (props) => {
         data={props.list}
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => navigation.navigate('Deck Details', { id: item.id })}
+            onPress={() => navigation.navigate('DeckDetails', { id: item.id })}
           >
             <DeckListItem
               title={item.title}
