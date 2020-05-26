@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
-import { Decks, AddDeck } from './components';
+import {
+  NoCards,
+  DeckDetails,
+  AddCard,
+  Quiz,
+  QuizResult,
+  Decks,
+  AddDeck,
+} from './components';
 import { Ionicons } from '@expo/vector-icons';
 import { Platform, StatusBar, SafeAreaView } from 'react-native';
 import Theme from './theme';
@@ -10,7 +18,6 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
 import middleware from './middleware';
-import { NoCards, DeckDetails, AddCard, Quiz, QuizResult } from './components';
 
 const store = createStore(reducer, middleware);
 
