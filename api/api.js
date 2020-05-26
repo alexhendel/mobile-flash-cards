@@ -1,3 +1,8 @@
+import { AsyncStorage } from 'react-native';
+
+let decks = {};
+const DATA_KEY = 'MobileFlashCards:Decks';
+/** TEST DATA 
 const decks = {
   '23425345563456456d': {
     id: '23425345563456456d',
@@ -13,6 +18,7 @@ const decks = {
     questions: [],
   },
 };
+*/
 
 function generateUID() {
   return (
@@ -21,42 +27,50 @@ function generateUID() {
   );
 }
 
-export function getDecks() {
+export async function getDecks() {
+  const resultStr = await AsyncStorage.getItem(DATA_KEY);
+  const data = JSON.parse(resultStr);
+  if (data) {
+    decks = data;
+  }
+
   return new Promise(function (resolve) {
     resolve(decks);
   });
 }
 
-export function getDeck(id) {
-  return new Promise(function (resolve) {
-    resolve(decks[id]);
-  });
-}
+export async function deleteDeck(id) {
+  decks[id] = {};
+  delete decks[id];
 
-export function deleteDeck(id) {
+  await AsyncStorage.setItem(DATA_KEY, JSON.stringify(decks));
+
   return new Promise(function (resolve) {
-    decks[id] = {};
-    delete decks[id];
     resolve(decks);
   });
 }
 
-export function addDeck(title) {
+export async function addDeck(title) {
   const id = generateUID();
   decks[id] = {
     id,
     title,
     questions: [],
   };
+
+  await AsyncStorage.setItem(DATA_KEY, JSON.stringify(decks));
+
   return new Promise(function (resolve) {
     resolve(decks[id]);
   });
 }
 
-export function addQuestion(id, { question, answer }) {
+export async function addQuestion(id, { question, answer }) {
   const questionId = generateUID();
   const newQuestion = { id: questionId, question, answer };
   decks[id].questions.push(newQuestion);
+
+  await AsyncStorage.setItem(DATA_KEY, JSON.stringify(decks));
 
   return new Promise(function (resolve) {
     resolve(newQuestion);
