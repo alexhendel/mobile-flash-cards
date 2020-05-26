@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TextInput, Button } from 'react-native';
 import { StackActions } from 'react-navigation';
-import Theme from '../theme';
+import Theme from '../utils/theme';
 import { handleAddDeck } from '../actions/decks';
 import { connect } from 'react-redux';
 

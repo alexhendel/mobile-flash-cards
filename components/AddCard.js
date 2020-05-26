@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 import { connect } from 'react-redux';
-import Theme from '../theme';
+import Theme from '../utils/theme';
 import { handleAddQuestion } from '../actions/decks';
 
 class AddCard extends Component {

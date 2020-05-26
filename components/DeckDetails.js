@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, View, Text, StyleSheet } from 'react-native';
-import Theme from '../theme';
+import Theme from '../utils/theme';
 import { connect } from 'react-redux';
 import { handleDeleteDeck } from '../actions/decks';
 

@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import DeckList from './DeckList';
 import { connect } from 'react-redux';
 import { handleGetDecks } from '../actions/decks';
-import { toArray } from '../utils';
+import { toArray } from '../utils/utils';
 
 class Decks extends Component {
   componentDidMount() {

@@ -13,7 +13,7 @@ import {
 } from './components';
 import { Ionicons } from '@expo/vector-icons';
 import { Platform, StatusBar, SafeAreaView } from 'react-native';
-import Theme from './theme';
+import Theme from './utils/theme';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
