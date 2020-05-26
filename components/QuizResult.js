@@ -1,13 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, StyleSheet } from 'react-native';
-import { withNavigation } from 'react-navigation';
 
 const QuizResult = (props) => {
-  const { navigation, result } = props;
-  const handleNavigate = () => {
-    navigation.navigate('Decks');
-  };
+  const { result } = props;
   return (
     <>
       <View style={styles.container}>
@@ -49,4 +45,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(QuizResult);
+export default QuizResult;
