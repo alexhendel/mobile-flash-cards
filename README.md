@@ -10,6 +10,10 @@ This app uses **React Native** and **Expo**. It is currently only tested on `And
 
 In the project directory, you can run:
 
+### Install dependencies `yarn`
+
+Install all project dependencies and packages.
+
 ### Start with `yarn start`
 
 Runs the app in the development mode.<br />
