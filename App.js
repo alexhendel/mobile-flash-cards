@@ -18,6 +18,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
 import middleware from './middleware';
+import { setLocalNotification } from './utils/notifications';
 
 const store = createStore(reducer, middleware);
 
@@ -110,6 +111,9 @@ switch (Platform.OS) {
 const NavContainer = createAppContainer(TabNavigator);
 
 class App extends Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
   render() {
     return (
       <Provider store={store}>
