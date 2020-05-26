@@ -5,3 +5,4 @@ export { default as DeckList } from './DeckList';
 export { default as Decks } from './Decks';
 export { default as NoCards } from './NoCards';
 export { default as Quiz } from './Quiz';
+export { default as QuizResult } from './QuizResult';

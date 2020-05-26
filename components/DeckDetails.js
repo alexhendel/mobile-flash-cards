@@ -21,7 +21,7 @@ class DeckDetails extends Component {
     if (decks[id].questions.length === 0 || !decks[id].questions) {
       navigation.navigate('NoCards');
     } else {
-      navigation.navigate('Quiz');
+      navigation.navigate('Quiz', { id });
     }
   };
   render() {

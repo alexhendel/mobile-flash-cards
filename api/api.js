@@ -2,7 +2,10 @@ const decks = {
   '23425345563456456d': {
     id: '23425345563456456d',
     title: 'Fancy Deck',
-    questions: [],
+    questions: [
+      { id: '23453645264566663', question: 'Test1', answer: 'Q1' },
+      { id: '234asdfdfg4566663', question: 'B', answer: 'Q22' },
+    ],
   },
   '4adfg23lk43q234344': {
     id: '4adfg23lk43q234344',
