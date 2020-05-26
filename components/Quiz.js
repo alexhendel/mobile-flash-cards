@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import Theme from '../utils/theme';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import QuizResult from './QuizResult';
+import {
+  clearNotification,
+  setLocalNotification,
+} from '../utils/notifications';
 
 class Quiz extends Component {
   state = {
@@ -41,6 +45,7 @@ class Quiz extends Component {
     if (current < decks[id].questions.length - 1) {
       this.setState(() => ({ current: current + 1 }));
     } else {
+      clearNotification().then(setLocalNotification);
       this.setState(() => ({
         current: 0,
         toggleAnswer: false,
