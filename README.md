@@ -6,6 +6,14 @@ Feel free check it out!
 
 This app uses **React Native** and **Expo**. It is currently only tested on `Android`. It should be compatible with iOS too though, but no guarantees :)
 
+## Screenshots
+
+Here are some screenshots of the app showing the flash card deck list, details and the quiz result page:
+
+| Deck List                                                          | Deck Details                                                              | Quiz Result                                                                   |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| ![Deck List](/docs/screenshots/deck-list.png?raw=true 'Deck List') | ![Deck Details](/docs/screenshots/deck-details.png?raw=true 'Deck Title') | ![Quiz Result](/docs/screenshots/quiz-finished.png?raw=true 'Optional Title') |
+
 ## Available Scripts
 
 In the project directory, you can run:
