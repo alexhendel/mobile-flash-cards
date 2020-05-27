@@ -11,10 +11,9 @@ class AddDeck extends Component {
   };
   handleAdd = () => {
     const { dispatch } = this.props;
-    dispatch(handleAddDeck(this.state.deckName)).then(() => {
+    dispatch(handleAddDeck(this.state.deckName)).then(({ deck }) => {
       this.setState(() => ({ deckName: '' }));
-      this.props.navigation.navigate('Decks');
-      this.props.navigation.dispatch(StackActions.popToTop());
+      this.props.navigation.navigate('DeckDetails', { id: deck.id });
     });
   };
   handleDeckNameChange = (value) => {
