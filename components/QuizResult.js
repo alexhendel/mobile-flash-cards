@@ -1,9 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import Theme from '../utils/theme';
 
 const QuizResult = (props) => {
-  const { result } = props;
+  const { result, navigation } = props;
+  const id = navigation.getParam('id', '');
+  const handleGoBack = () => {
+    navigation.navigate('DeckDetails', { id });
+  };
+  const handleStartQuiz = () => {
+    navigation.goBack();
+    navigation.navigate('Quiz', { id });
+  };
   return (
     <>
       <View style={styles.container}>
@@ -12,8 +22,22 @@ const QuizResult = (props) => {
           {result.correct} out of {result.count} where answered correctly.
         </Text>
         <Text style={styles.subTitle}>
-          You scored {(result.correct * 100) / result.count}%.
+          You scored {((result.correct * 100) / result.count).toFixed(2)}%.
         </Text>
+        <View style={styles.actionButton}>
+          <Button
+            color={Theme.primary.color}
+            title="Back to Deck"
+            onPress={handleGoBack}
+          />
+        </View>
+        <View style={styles.actionButton}>
+          <Button
+            color={Theme.primary.color}
+            title="Restart Quiz"
+            onPress={handleStartQuiz}
+          />
+        </View>
       </View>
     </>
   );
@@ -40,9 +64,12 @@ const styles = StyleSheet.create({
   subTitle: {
     fontSize: 15,
     color: 'grey',
-
     textAlign: 'center',
+    marginBottom: 25,
+  },
+  actionButton: {
+    marginBottom: 25,
   },
 });
 
-export default QuizResult;
+export default withNavigation(QuizResult);
