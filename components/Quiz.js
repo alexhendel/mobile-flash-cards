@@ -31,10 +31,14 @@ class Quiz extends Component {
     }));
   };
   handleCorrect = () => {
-    this.setState(() => ({ correct: this.state.correct + 1 }));
+    this.setState(() => ({
+      correct: this.state.correct + 1,
+      toggleAnswer: false,
+    }));
     this.handleNextQuestion();
   };
   handleNotCorrect = () => {
+    this.setState(() => ({ toggleAnswer: false }));
     this.handleNextQuestion();
   };
   handleNextQuestion = () => {
